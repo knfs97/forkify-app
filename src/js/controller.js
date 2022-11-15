@@ -132,9 +132,6 @@ const controlAddRecipe = async function (newRecipe) {
     addRecipeView.renderError(error.message);
   }
 };
-const newFeature = function () {
-  console.log('welcome');
-};
 ////////////////////////////////
 // IMP: Here Starts the application
 const init = function () {
@@ -145,7 +142,6 @@ const init = function () {
   searchView.addHandlerSearch(controlSearchResults); // submit (event)
   paginationView.addHandlerClick(controlPagination); // click (event)
   addRecipeView._addHandlerUpload(controlAddRecipe); // submit (event)
-  newFeature();
 };
 init();
 
