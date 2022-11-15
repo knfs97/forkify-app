@@ -3,7 +3,7 @@ import icons from 'url:../../img/icons.svg'; // Parcel 2 (all asset that are no 
 class PreviewView extends View {
   _parentElement = '';
 
-  _generateMarkup(result) {
+  _generateMarkup() {
     const id = window.location.hash.slice(1);
     return `
       <li class="preview">
