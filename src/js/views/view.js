@@ -24,6 +24,12 @@ export default class View {
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
+  /**
+   * Update data in DOM without render all again.
+   * It will only update changed elements in DOM
+   * @param {Object | Object[]} data The new data to be updated (e.g recipe)
+   * @this {Object} View instance
+   */
   update(data) {
     this._data = data;
     const newMarkup = this._generateMarkup();
@@ -50,9 +56,17 @@ export default class View {
         );
     });
   }
+  /**
+   * Clear HTML element contains the View ( parent element ) before new HTML is inserted.
+   * @this {Object} View instance
+   */
   _clear() {
     this._parentElement.innerHTML = '';
   }
+  /**
+   * Render a Spinner before display new HTML markup to make more user friendly
+   * @this {Object} Instance of View's children classes (eg. RecipeView)
+   */
   renderSpinner() {
     const markup = `<div class="spinner">
     <svg>
@@ -63,6 +77,12 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
+  /**
+   * Display an message with an icon, used mostly to show success message.
+   * 
+   * @param {String} message By default is equal to _message property inside each View's children class
+   * @this {Object} View instance
+   */
   renderMessage(message = this._message) {
     const markup = `
       <div class="message">
@@ -78,6 +98,12 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
+   /**
+   * Display an message with an icon, used to show error message.
+   * 
+   * @param {String} message By default is equal to _errorMessage property inside each View's children class
+   * @this {Object} View instance
+   */
   renderError(message = this._errorMessage) {
     const markup = `
       <div class="error">

@@ -1,5 +1,6 @@
 import { async } from 'regenerator-runtime';
 import { TIMEOUT_SEC } from './config.js';
+
 /**
  * Goal: contains a couple of functions that we reuse over and over in our project
  */
