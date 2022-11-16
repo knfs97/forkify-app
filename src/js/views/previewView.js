@@ -3,6 +3,11 @@ import icons from 'url:../../img/icons.svg'; // Parcel 2 (all asset that are no 
 class PreviewView extends View {
   _parentElement = '';
 
+  /**
+   * Used as complimented function with bookmarksView to print the list of 
+   * all the bookmarked recipe
+   * @returns {string} : markup with a bookmarked recipe
+   */
   _generateMarkup() {
     const id = window.location.hash.slice(1);
     return `
