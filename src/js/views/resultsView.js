@@ -7,6 +7,9 @@ class ResultsView extends View {
   _errorMessage = 'No recipes found for your query! Please try again';
   _message = '';
 
+  /**
+   * @returns {string} Markup to print each preview recipes in the result view
+   */
   _generateMarkup() {
     return this._data.map(result => previewView.render(result, false)).join('');
   }

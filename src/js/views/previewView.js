@@ -4,8 +4,7 @@ class PreviewView extends View {
   _parentElement = '';
 
   /**
-   * Used as complimented function with bookmarksView to print the list of 
-   * all the bookmarked recipe
+   * Used as complimented function with resultView to print the list of all recipes
    * @returns {string} : markup with a bookmarked recipe
    */
   _generateMarkup() {

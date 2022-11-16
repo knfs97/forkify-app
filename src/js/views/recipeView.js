@@ -7,10 +7,19 @@ class RecipeView extends View {
   _errorMessage = 'We could not find that recipe. Please try another one!';
   _message = '';
 
+  /**
+   * Add render handler to the View using the pattern Publisher(view) - Subscriber(controller)
+   * @param {Object} handler Async function in the controller which handles show recipe whenever page load or hash change
+   */
   addHandlerRender(handler) {
     // get recipe by hash change or page loads
     ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
   }
+  /**
+   * Add an Update handler using the parameter to pass that functionality to the view 
+   * @param {Object} handler Async function in the controller which handles the update of the servings in the shown recipe 
+   * @this {Object} View instance
+   */
   addHandlerUpdateServings(handler) {
     this._parentElement.addEventListener('click', function (e) {
       const btn = e.target.closest('.btn--update-servings');
@@ -22,6 +31,12 @@ class RecipeView extends View {
       if (+updateTo > 0) handler(+updateTo);
     });
   }
+  /**
+   * Add a handler to the button add bookmark to give the user possibility add a new recipe to bookmarks 
+   * @param {Object} handler Async function come from the controller 
+   * to give a click event listener to the _parentElement
+   * @this {Object} View instance
+   */
   addHandlerAddBookmark(handler) {
     this._parentElement.addEventListener('click', function (e) {
       const btn = e.target.closest('.btn--bookmark');
@@ -30,6 +45,11 @@ class RecipeView extends View {
       handler();
     });
   }
+
+  /**
+   * @this {Object} View instance
+   * @returns {string} markup containing the details about the recipe
+   */
   _generateMarkup() {
     return `
     <figure class="recipe__fig">
@@ -121,6 +141,11 @@ class RecipeView extends View {
     </div>`;
   }
 
+  /**
+   * Compliments _generateMarkup to display each ingredient
+   * @param {string} ing ingredient 
+   * @returns markup containing the ingredients
+   */
   _generateMarkupIngredients(ing) {
     return `
       <li class="recipe__ingredient">
