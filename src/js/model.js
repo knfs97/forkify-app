@@ -15,6 +15,11 @@ export const state = {
   bookmarks: [],
 };
 
+/**
+ * Creates a new Recipe from data
+ * @param {Object} data Used to create a new Recipe
+ * @returns {Object} Recipe created
+ */
 const createRecipeObject = function (data) {
   const { recipe } = data.data;
   return {
@@ -31,6 +36,11 @@ const createRecipeObject = function (data) {
 };
 ////////////////////////////
 // IMP: Show Recipe Feature
+/**
+ * Load recipe from Object state
+ * @async
+ * @param {string} id ID of the recipe 
+ */
 export const loadRecipe = async function (id) {
   try {
     const data = await AJAX(`${API_URL}${id}`);
@@ -47,6 +57,10 @@ export const loadRecipe = async function (id) {
 };
 //////////////////////////////
 // IMP : Search Feature
+/**
+ * Fill property results of Object state.search with the data from the API
+ * @param {string} query Query to be used to retrieve all the recipes that match it  
+ */
 export const loadSearchResults = async function (query) {
   try {
     state.search.query = query;
@@ -67,7 +81,11 @@ export const loadSearchResults = async function (query) {
     throw error;
   }
 };
-
+/**
+ * From number of recipes per page returns on that amount of recipes from state.search.results array
+ * @param {number} page Current page 
+ * @returns {Array} array with length that match number of recipe per page specify 
+ */
 export const getSearchResultsPage = function (page = state.search.page) {
   state.search.page = page;
 
@@ -79,6 +97,10 @@ export const getSearchResultsPage = function (page = state.search.page) {
 
 ////////////////////
 // IMP : Serving Feature
+/**
+ * Update ingredients quantity with the new servings amount
+ * @param {number} newServings New amount of each ingredient to update servings 
+ */
 export const updateServings = function (newServings) {
   state.recipe.ingredients.forEach(ing => {
     ing.quantity = (ing.quantity * newServings) / state.recipe.servings;
@@ -90,9 +112,16 @@ export const updateServings = function (newServings) {
 
 ///////////////////////////
 // IMP : Bookmark Feature
+/**
+ * Stores in the local storage all bookmarked recipes
+ */
 const persistBookmarks = function () {
   localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
 };
+/**
+ * Add a Recipe to bookmarks array
+ * @param {Object} recipe 
+ */
 export const addBookmark = function (recipe) {
   // Add bookmark
   state.bookmarks.push(recipe);
@@ -102,6 +131,10 @@ export const addBookmark = function (recipe) {
 
   persistBookmarks();
 };
+/**
+ * Remove a recipe from bookmarks array using its ID
+ * @param {string} id Recipe ID 
+ */
 export const deleteBookmark = function (id) {
   // delete bookmark
   const index = state.bookmarks.findIndex(el => el.id === id);
@@ -113,6 +146,9 @@ export const deleteBookmark = function (id) {
   persistBookmarks();
 };
 
+/**
+ * Get all bookmarked recipes from local storage and save them in bookmarks array
+ */
 const init = function () {
   const storage = localStorage.getItem('bookmarks');
   if (storage) state.bookmarks = JSON.parse(storage);
@@ -122,6 +158,12 @@ init();
 
 ///////////////////////////
 // IMP: Add recipe Feature
+/**
+ * Upload a new recipe after being added from the user and add to bookmarks array 
+ * because all added recipe by user are automatically bookmarked
+ * @async
+ * @param {Object} newRecipe 
+ */
 export const uploadRecipe = async function (newRecipe) {
   try {
     const ingredients = Object.entries(newRecipe)

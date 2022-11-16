@@ -15,6 +15,11 @@ import 'regenerator-runtime/runtime'; // polyfilling async/await
 // }
 ///////////////////////////////////////
 // IMP: Recipe Control
+/**
+ * @async
+ * This function controls what happens with the recipe, displaying and rendering/updating the DOM
+ * @returns in case there is no ID, if so no recipe will be displayed
+ */
 const controlRecipe = async function () {
   try {
     // get id
@@ -42,6 +47,11 @@ const controlRecipe = async function () {
 };
 //////////////////////
 // IMP: Search Control
+/**
+ * render all the recipe using a query into resultsView
+ * @async
+ * @returns whenever is a problem with the query (e.g undefined | empty string)
+ */
 const controlSearchResults = async function () {
   try {
     resultsView.renderSpinner();
@@ -67,6 +77,10 @@ const controlSearchResults = async function () {
 };
 /////////////////////////////
 // IMP: Pagination Control
+/**
+ * Controls to what page user wants to go 
+ * @param {number} gotoPage page where user decided to go
+ */
 const controlPagination = function (gotoPage) {
   // 1) Render NEW results
   resultsView.render(model.getSearchResultsPage(gotoPage));
@@ -76,6 +90,10 @@ const controlPagination = function (gotoPage) {
 };
 ////////////////////////
 // IMP: Serving Control
+/**
+ * Update servings of each ingredient in a recipe
+ * @param {number} newServings new amount of the ingredients (e.g 1 egg to 2 eggs)
+ */
 const controlServings = function (newServings) {
   // Update the recipe servings (in state)
   model.updateServings(newServings);
@@ -84,6 +102,9 @@ const controlServings = function (newServings) {
   // recipeView.render(model.state.recipe);
   recipeView.update(model.state.recipe);
 };
+/**
+ * Add a new Bookmarked recipe
+ */
 const controlAddBookmark = function () {
   // Add/remove bookmark
   if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
@@ -97,12 +118,20 @@ const controlAddBookmark = function () {
 };
 ///////////////////////////
 // IMP : Bookmarks Control
+/**
+ * Renders all bookmarked recipes
+ */
 const controlBookmarks = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
 //////////////////////////////
 // IMP : Control add recipe
+/**
+ * Add a new recipe
+ * @async
+ * @param {Object} newRecipe New recipe to be added 
+ */
 const controlAddRecipe = async function (newRecipe) {
   try {
     // Show loading spinner
@@ -134,6 +163,10 @@ const controlAddRecipe = async function (newRecipe) {
 };
 ////////////////////////////////
 // IMP: Here Starts the application
+/**
+ * Starting function of the entire application giving to all the views their respective 
+ * handlers
+ */
 const init = function () {
   bookmarksView.addHandlerRender(controlBookmarks); // load (event)
   recipeView.addHandlerRender(controlRecipe); // hashchange or load (event)
@@ -145,6 +178,10 @@ const init = function () {
 };
 init();
 
+/**
+ * Clear bookmarked recipe
+ * @development function
+ */
 const clearBookmarks = function () {
   localStorage.clear('bookmarks');
 };
