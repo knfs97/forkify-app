@@ -39,7 +39,7 @@ const createRecipeObject = function (data) {
 /**
  * Load recipe from Object state
  * @async
- * @param {string} id ID of the recipe 
+ * @param {string} id ID of the recipe
  */
 export const loadRecipe = async function (id) {
   try {
@@ -59,7 +59,7 @@ export const loadRecipe = async function (id) {
 // IMP : Search Feature
 /**
  * Fill property results of Object state.search with the data from the API
- * @param {string} query Query to be used to retrieve all the recipes that match it  
+ * @param {string} query Query to be used to retrieve all the recipes that match it
  */
 export const loadSearchResults = async function (query) {
   try {
@@ -83,8 +83,8 @@ export const loadSearchResults = async function (query) {
 };
 /**
  * From number of recipes per page returns on that amount of recipes from state.search.results array
- * @param {number} page Current page 
- * @returns {Array} array with length that match number of recipe per page specify 
+ * @param {number} page Current page
+ * @returns {Array} array with length that match number of recipe per page specify
  */
 export const getSearchResultsPage = function (page = state.search.page) {
   state.search.page = page;
@@ -99,7 +99,7 @@ export const getSearchResultsPage = function (page = state.search.page) {
 // IMP : Serving Feature
 /**
  * Update ingredients quantity with the new servings amount
- * @param {number} newServings New amount of each ingredient to update servings 
+ * @param {number} newServings New amount of each ingredient to update servings
  */
 export const updateServings = function (newServings) {
   state.recipe.ingredients.forEach(ing => {
@@ -120,7 +120,7 @@ const persistBookmarks = function () {
 };
 /**
  * Add a Recipe to bookmarks array
- * @param {Object} recipe 
+ * @param {Object} recipe
  */
 export const addBookmark = function (recipe) {
   // Add bookmark
@@ -133,7 +133,7 @@ export const addBookmark = function (recipe) {
 };
 /**
  * Remove a recipe from bookmarks array using its ID
- * @param {string} id Recipe ID 
+ * @param {string} id Recipe ID
  */
 export const deleteBookmark = function (id) {
   // delete bookmark
@@ -159,10 +159,10 @@ init();
 ///////////////////////////
 // IMP: Add recipe Feature
 /**
- * Upload a new recipe after being added from the user and add to bookmarks array 
+ * Upload a new recipe after being added from the user and add to bookmarks array
  * because all added recipe by user are automatically bookmarked
  * @async
- * @param {Object} newRecipe 
+ * @param {Object} newRecipe
  */
 export const uploadRecipe = async function (newRecipe) {
   try {
