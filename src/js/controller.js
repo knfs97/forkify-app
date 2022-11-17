@@ -78,7 +78,7 @@ const controlSearchResults = async function () {
 /////////////////////////////
 // IMP: Pagination Control
 /**
- * Controls to what page user wants to go 
+ * Controls to what page user wants to go
  * @param {number} gotoPage page where user decided to go
  */
 const controlPagination = function (gotoPage) {
@@ -130,7 +130,7 @@ const controlBookmarks = function () {
 /**
  * Add a new recipe
  * @async
- * @param {Object} newRecipe New recipe to be added 
+ * @param {Object} newRecipe New recipe to be added
  */
 const controlAddRecipe = async function (newRecipe) {
   try {
@@ -164,7 +164,7 @@ const controlAddRecipe = async function (newRecipe) {
 ////////////////////////////////
 // IMP: Here Starts the application
 /**
- * Starting function of the entire application giving to all the views their respective 
+ * Starting function of the entire application giving to all the views their respective
  * handlers
  */
 const init = function () {
